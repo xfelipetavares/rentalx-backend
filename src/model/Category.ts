@@ -10,7 +10,6 @@ class Category {
     if(!this.id){
       this.id = uuid()
     }
-
   }
 }
 
