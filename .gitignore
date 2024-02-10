@@ -8,3 +8,4 @@ tmp/*
 
 docker-compose.yml
 ormconfig.json
+.DS_Store
