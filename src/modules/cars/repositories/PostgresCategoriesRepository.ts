@@ -1,7 +1,7 @@
 import { Category } from "../model/Category"
-import { ICategoriesRepository, ICreateCategoryDTO } from "./CategoriesRepository.contract"
+import { CategoriesRepositoryContract, ICreateCategoryDTO } from "./contract.CategoriesRepository"
 
-class PostgresCategoriesRepository implements ICategoriesRepository {
+class PostgresCategoriesRepository implements CategoriesRepositoryContract {
   create({ name, description }: ICreateCategoryDTO): void {
     console.log("postgres create", name, description)
     return null

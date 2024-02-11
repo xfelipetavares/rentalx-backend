@@ -1,4 +1,4 @@
-import { ICategoriesRepository } from "../repositories/CategoriesRepository.contract"
+import { CategoriesRepositoryContract } from "../repositories/contract.CategoriesRepository"
 
 interface IRequest {
   name: string
@@ -6,7 +6,7 @@ interface IRequest {
 }
 
 class CreateCategoryService {
-  constructor(private categoriesRepository: ICategoriesRepository) {}
+  constructor(private categoriesRepository: CategoriesRepositoryContract) {}
 
   execute({ name, description }: IRequest): void {
     if (this.categoriesRepository.findByName(name)) {
