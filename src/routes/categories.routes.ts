@@ -1,9 +1,10 @@
 import { Router } from "express"
-import { CategoriesRepository } from "../repositories/CategoriesRepository"
+import { RAMCategoriesRepository } from "../repositories/RAMCategoriesRepository"
 import { CreateCategoryService } from "../services/CreateCategory.service"
+// import { PostgresCategoriesRepository } from "../repositories/PostgresCategoriesRepository"
 
 const categoriesRoutes = Router()
-const categoriesRepository = new CategoriesRepository()
+const categoriesRepository = new RAMCategoriesRepository()
 
 categoriesRoutes.post("/", (request, response) => {
   const { name, description } = request.body
