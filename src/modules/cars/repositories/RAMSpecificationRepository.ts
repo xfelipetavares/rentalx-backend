@@ -10,6 +10,7 @@ class RAMSpecificationRepository implements SpecificationsRepositoryContract {
   constructor() {
     this.specifications = []
   }
+
   create({ description, name }: ICreateSpecificationDTO): void {
     const specification = new Specification()
 
@@ -20,6 +21,12 @@ class RAMSpecificationRepository implements SpecificationsRepositoryContract {
     })
 
     this.specifications.push(specification)
+  }
+
+  findByName(name: string): Specification {
+    const specification = this.specifications.find((spec) => spec.name === name)
+
+    return specification
   }
 }
 
