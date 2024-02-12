@@ -1,9 +1,16 @@
 import { Request, Response } from "express"
+import { CreateSpecificationUseCase } from "./CreateSpecificationUseCase"
 
-class CreateCategoryController {
+class CreateSpecificationController {
+  constructor(private specificationUseCase: CreateSpecificationUseCase) {}
+
   handle(request: Request, response: Response) {
-    
+    const { name, description } = request.body
+
+    this.specificationUseCase.execute({ name, description })
+
+    return response.status(201).send()
   }
 }
 
-export { CreateCategoryController }
+export { CreateSpecificationController }
