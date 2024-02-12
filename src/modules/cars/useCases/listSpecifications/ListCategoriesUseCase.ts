@@ -1,13 +1,13 @@
-import { Category } from "../../model/Category"
-import { CategoriesRepositoryContract } from "../../repositories/contracts/contract.CategoriesRepository"
+import { Specification } from "../../model/Specification"
+import { SpecificationsRepositoryContract } from "../../repositories/contracts/contract.SpecificationsRepository"
 
-class ListCategoryUseCase {
-  constructor(private categoriesRepository: CategoriesRepositoryContract) {}
+class ListSpecificationsUseCase {
+  constructor(private specificationRepository: SpecificationsRepositoryContract) {}
 
-  execute(): Category[] {
-    const result = this.categoriesRepository.list()
+  execute(): Specification[] {
+    const result = this.specificationRepository.listSpecifications()
     return result
   }
 }
 
-export { ListCategoryUseCase }
+export { ListSpecificationsUseCase }

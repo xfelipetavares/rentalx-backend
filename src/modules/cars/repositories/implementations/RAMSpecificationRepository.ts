@@ -7,8 +7,21 @@ import {
 class RAMSpecificationRepository implements SpecificationsRepositoryContract {
   private specifications: Specification[]
 
-  constructor() {
+  private static INSTANCE: RAMSpecificationRepository
+
+  private constructor() {
     this.specifications = []
+  }
+
+  listSpecifications(): Specification[] {
+    return this.specifications
+  }
+
+  public static getInstance(): RAMSpecificationRepository {
+    if (!RAMSpecificationRepository.INSTANCE) {
+      RAMSpecificationRepository.INSTANCE = new RAMSpecificationRepository()
+    }
+    return RAMSpecificationRepository.INSTANCE
   }
 
   create({ description, name }: ICreateSpecificationDTO): void {
