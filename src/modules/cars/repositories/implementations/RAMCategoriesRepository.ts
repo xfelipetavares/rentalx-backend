@@ -1,8 +1,8 @@
-import { Category } from "../model/Category"
+import { Category } from "../../model/Category"
 import {
   CategoriesRepositoryContract,
   ICreateCategoryDTO,
-} from "../repositories/contract.CategoriesRepository"
+} from "../contracts/contract.CategoriesRepository"
 
 class RAMCategoriesRepository implements CategoriesRepositoryContract {
   private categories: Category[]

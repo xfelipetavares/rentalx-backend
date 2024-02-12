@@ -1,6 +1,7 @@
 import { Router } from "express"
-import { RAMSpecificationRepository } from "../modules/cars/repositories/RAMSpecificationRepository"
+
 import { CreateSpecificationUseCase } from "../modules/cars/useCases/createSpecification/CreateSpecificationUseCase"
+import { RAMSpecificationRepository } from "../modules/cars/repositories/implementations/RAMSpecificationRepository"
 
 const specificationsRoutes = Router()
 const specificationRepository = new RAMSpecificationRepository()

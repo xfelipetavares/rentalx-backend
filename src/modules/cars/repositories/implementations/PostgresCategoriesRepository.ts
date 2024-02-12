@@ -1,5 +1,8 @@
-import { Category } from "../model/Category"
-import { CategoriesRepositoryContract, ICreateCategoryDTO } from "./contract.CategoriesRepository"
+import { Category } from "../../model/Category"
+import {
+  CategoriesRepositoryContract,
+  ICreateCategoryDTO,
+} from "../contracts/contract.CategoriesRepository"
 
 class PostgresCategoriesRepository implements CategoriesRepositoryContract {
   create({ name, description }: ICreateCategoryDTO): void {

@@ -1,4 +1,4 @@
-import { RAMCategoriesRepository } from "../../repositories/RAMCategoriesRepository"
+import { RAMCategoriesRepository } from "../../repositories/implementations/RAMCategoriesRepository"
 import { ListCategoriesController } from "./ListCategoriesController"
 import { ListCategoryUseCase } from "./ListCategoriesUseCase"
 
