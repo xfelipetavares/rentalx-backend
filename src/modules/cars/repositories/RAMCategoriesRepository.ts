@@ -7,8 +7,18 @@ import {
 class RAMCategoriesRepository implements CategoriesRepositoryContract {
   private categories: Category[]
 
-  constructor() {
+  // singleton
+  private static INSTANCE: RAMCategoriesRepository
+
+  private constructor() {
     this.categories = []
+  }
+
+  public static getInstance(): RAMCategoriesRepository {
+    if (!RAMCategoriesRepository.INSTANCE) {
+      RAMCategoriesRepository.INSTANCE = new RAMCategoriesRepository()
+    }
+    return RAMCategoriesRepository.INSTANCE
   }
 
   create({ description, name }: ICreateCategoryDTO): void {
