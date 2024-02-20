@@ -6,6 +6,5 @@ coverage
 tmp/*
 !tmp/.gitkeep
 
-docker-compose.yml
 ormconfig.json
 .DS_Store
