@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   rentx_database:
     image: postgres
@@ -23,6 +25,8 @@ services:
       - .:/usr/app
     networks:
       - asgard
+    depends_on:
+      - rentx_database
 
 volumes:
   pgdata:
