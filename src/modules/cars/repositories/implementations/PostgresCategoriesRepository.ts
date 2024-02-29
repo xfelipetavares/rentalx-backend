@@ -1,26 +1,41 @@
-import { Category } from "../../model/Category"
+import { Repository, getRepository } from "typeorm"
+import { Category } from "../../entities/Category"
 import {
   CategoriesRepositoryContract,
   ICreateCategoryDTO,
 } from "../contracts/contract.CategoriesRepository"
 
 class PostgresCategoriesRepository implements CategoriesRepositoryContract {
-  create({ name, description }: ICreateCategoryDTO): void {
-    console.log("postgres create", name, description)
-    return null
-    throw new Error("Method not implemented.")
+  private repository: Repository<Category>
+
+  constructor() {
+    this.repository = getRepository(Category)
   }
 
-  list(): Category[] {
-    console.log("list category")
-    return null
-    throw new Error("Method not implemented.")
+  // public static getInstance(): RAMCategoriesRepository {
+  //   if (!RAMCategoriesRepository.INSTANCE) {
+  //     RAMCategoriesRepository.INSTANCE = new RAMCategoriesRepository()
+  //   }
+  //   return RAMCategoriesRepository.INSTANCE
+  // }
+
+  async create({ description, name }: ICreateCategoryDTO): Promise<void> {
+    const category = this.repository.create({
+      description,
+      name,
+    })
+
+    await this.repository.save(category)
   }
 
-  findByName(name: string): Category {
-    console.log("postgres found", name)
-    return null
-    throw new Error("Method not implemented.")
+  async list(): Promise<Category[]> {
+    const categories = await this.repository.find()
+    return categories
+  }
+
+  async findByName(name: string): Promise<Category> {
+    const category = await this.repository.findOne({ name })
+    return category
   }
 }
 

@@ -1,9 +1,11 @@
-import { RAMCategoriesRepository } from "../../repositories/implementations/RAMCategoriesRepository"
+import { PostgresCategoriesRepository } from "../../repositories/implementations/PostgresCategoriesRepository"
 import { ImportCategoriesController } from "./ImportCategoriesController"
 import { ImportCategoriesUseCase } from "./ImportCategoriesUseCase"
 
-const categoriesRepository = RAMCategoriesRepository.getInstance()
-const importCategoriesUseCase = new ImportCategoriesUseCase(categoriesRepository)
-const importCategoriesController = new ImportCategoriesController(importCategoriesUseCase)
+export default () => {
+  const categoriesRepository = new PostgresCategoriesRepository()
+  const importCategoriesUseCase = new ImportCategoriesUseCase(categoriesRepository)
+  const importCategoriesController = new ImportCategoriesController(importCategoriesUseCase)
 
-export { importCategoriesController }
+  return importCategoriesController
+}
