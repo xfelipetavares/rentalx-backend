@@ -12,13 +12,6 @@ class PostgresCategoriesRepository implements CategoriesRepositoryContract {
     this.repository = getRepository(Category)
   }
 
-  // public static getInstance(): RAMCategoriesRepository {
-  //   if (!RAMCategoriesRepository.INSTANCE) {
-  //     RAMCategoriesRepository.INSTANCE = new RAMCategoriesRepository()
-  //   }
-  //   return RAMCategoriesRepository.INSTANCE
-  // }
-
   async create({ description, name }: ICreateCategoryDTO): Promise<void> {
     const category = this.repository.create({
       description,

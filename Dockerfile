@@ -1,11 +1,13 @@
 FROM node
 
-WORKDIR /usr/app
+EXPOSE 3333
 
-COPY . .
+WORKDIR /app
+
+COPY package*.json ./
 
 RUN npm install
 
-EXPOSE 3333
+COPY . .
 
 CMD [ "npm", "run", "dev" ]
