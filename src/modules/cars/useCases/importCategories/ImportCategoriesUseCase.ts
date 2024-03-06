@@ -1,14 +1,19 @@
 import { parse } from "csv-parse"
 import fs from "fs"
 import { CategoriesRepositoryContract } from "../../repositories/contracts/contract.CategoriesRepository"
+import { inject, injectable } from "tsyringe"
 
 interface IImportedCategories {
   name: string
   description: string
 }
 
+@injectable()
 class ImportCategoriesUseCase {
-  constructor(private categoriesRepository: CategoriesRepositoryContract) {}
+  constructor(
+    @inject("PostgresCategoriesRepository")
+    private categoriesRepository: CategoriesRepositoryContract
+  ) {}
 
   loadCategories(file: Express.Multer.File): Promise<IImportedCategories[]> {
     return new Promise((resolve, reject) => {
