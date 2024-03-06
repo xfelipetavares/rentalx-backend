@@ -1,16 +1,19 @@
 import { CategoriesRepositoryContract } from "../../repositories/contracts/contract.CategoriesRepository"
+import { inject, injectable } from "tsyringe"
 
 interface IRequest {
   name: string
   description: string
 }
 
+@injectable()
 class CreateCategoryUseCase {
-  constructor(private categoriesRepository: CategoriesRepositoryContract) {}
+  constructor(
+    @inject("PostgresCategoriesRepository")
+    private categoriesRepository: CategoriesRepositoryContract
+  ) {}
 
   async execute({ name, description }: IRequest): Promise<void> {
-    console.log("caiu aqui")
-
     if (await this.categoriesRepository.findByName(name)) {
       throw new Error("Category already exists.")
     }

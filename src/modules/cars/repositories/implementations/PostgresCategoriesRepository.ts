@@ -6,11 +6,7 @@ import {
 } from "../contracts/contract.CategoriesRepository"
 
 class PostgresCategoriesRepository implements CategoriesRepositoryContract {
-  private repository: Repository<Category>
-
-  constructor() {
-    this.repository = getRepository(Category)
-  }
+  constructor(private repository: Repository<Category> = getRepository(Category)) {}
 
   async create({ description, name }: ICreateCategoryDTO): Promise<void> {
     const category = this.repository.create({
