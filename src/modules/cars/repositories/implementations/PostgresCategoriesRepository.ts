@@ -1,4 +1,4 @@
-import { Repository, getRepository } from "typeorm"
+import { ILike, Repository, getRepository } from "typeorm"
 import { Category } from "../../entities/Category"
 import {
   CategoriesRepositoryContract,
@@ -23,7 +23,7 @@ class PostgresCategoriesRepository implements CategoriesRepositoryContract {
   }
 
   async findByName(name: string): Promise<Category> {
-    const category = await this.repository.findOne({ name })
+    const category = await this.repository.findOne({ where: { name: ILike(name) } })
     return category
   }
 }

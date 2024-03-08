@@ -1,4 +1,4 @@
-import { Repository, getRepository } from "typeorm"
+import { ILike, Repository, getRepository } from "typeorm"
 import { Specification } from "../../entities/Specification"
 import {
   ICreateSpecificationDTO,
@@ -24,7 +24,7 @@ class PostgresSpecificationRepository implements SpecificationsRepositoryContrac
   }
 
   async findByName(name: string): Promise<Specification> {
-    const specification = await this.repository.findOne({ name })
+    const specification = await this.repository.findOne({ where: { name: ILike(name) } })
     return specification
   }
 }
