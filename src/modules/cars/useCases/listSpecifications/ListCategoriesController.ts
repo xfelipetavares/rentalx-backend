@@ -1,14 +1,14 @@
-import { Request, Response } from "express"
-import { ListSpecificationsUseCase } from "./ListCategoriesUseCase"
+// import { Request, Response } from "express"
+// import { ListSpecificationsUseCase } from "./ListCategoriesUseCase"
 
-class ListSpecificationsController {
-  constructor(private listSpecificationsUseCase: ListSpecificationsUseCase) {}
+// class ListSpecificationsController {
+//   constructor(private listSpecificationsUseCase: ListSpecificationsUseCase) {}
 
-  handle(request: Request, response: Response): Response {
-    const result = this.listSpecificationsUseCase.execute()
+//   handle(request: Request, response: Response): Response {
+//     const result = this.listSpecificationsUseCase.execute()
 
-    return response.json(result)
-  }
-}
+//     return response.json(result)
+//   }
+// }
 
-export { ListSpecificationsController }
+// export { ListSpecificationsController }
