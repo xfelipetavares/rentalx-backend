@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { container } from "tsyringe"
 import { CreateUserUseCase } from "./CreateUserUseCase"
-import { ICreateUserDTO } from "../repositories/contracts/ContractUsersRepository"
+import { ICreateUserDTO } from "../../repositories/contracts/ContractUsersRepository"
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
