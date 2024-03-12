@@ -5,11 +5,10 @@ import { ICreateUserDTO } from "../repositories/contracts/ContractUsersRepositor
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, username, email, password, driver_license } = request.body as ICreateUserDTO
-    console.log("aquii")
+    const { name, email, password, driver_license } = request.body as ICreateUserDTO
     const createUserUseCase = container.resolve(CreateUserUseCase)
 
-    await createUserUseCase.execute({ name, username, email, password, driver_license })
+    await createUserUseCase.execute({ name, email, password, driver_license })
 
     return response.status(201).send()
   }

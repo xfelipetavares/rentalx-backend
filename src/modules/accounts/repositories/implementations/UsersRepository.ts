@@ -5,10 +5,9 @@ import { User } from "../../entities/User"
 class UsersRepository implements ContractUsersRepository {
   constructor(private repository: Repository<User> = getRepository(User)) {}
 
-  async create({ name, username, password, email, driver_license }: ICreateUserDTO): Promise<void> {
+  async create({ name, password, email, driver_license }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       name,
-      username,
       email,
       password,
       driver_license,
