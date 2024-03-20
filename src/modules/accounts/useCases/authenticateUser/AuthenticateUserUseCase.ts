@@ -2,7 +2,7 @@ import { compare } from "bcrypt"
 import { sign } from "jsonwebtoken"
 import { inject, injectable } from "tsyringe"
 import { ContractUsersRepository } from "../../repositories/contracts/ContractUsersRepository"
-import { response } from "express"
+import { AppError } from "../../../../errors/appError"
 
 interface IRequest {
   email: string
@@ -24,28 +24,27 @@ class AuthenticateUserUseCase {
     private userRepository: ContractUsersRepository
   ) {}
   async execute({ email, password }: IRequest): Promise<IResponse> {
-    try {
-      const user = await this.userRepository.findByEmail(email)
-      const passwordMatch = await compare(password, user.password)
+    const user = await this.userRepository.findByEmail(email)
 
-      if (!user || !passwordMatch) {
-        throw new Error("Email or password incorrect!")
-      }
+    if (!user) throw new AppError("User doesn't exist.", 401)
 
-      const token = sign({}, "dorinha", {
-        subject: user.id,
-        expiresIn: "1d",
-      })
+    const passwordMatch = await compare(password, user.password)
 
-      return {
-        user: {
-          name: user.name,
-          email: user.email,
-        },
-        token,
-      }
-    } catch (error) {
-      return error.message
+    if (!user || !passwordMatch) {
+      throw new AppError("Email or password incorrect!", 401)
+    }
+
+    const token = sign({}, "dorinha", {
+      subject: user.id,
+      expiresIn: "1d",
+    })
+
+    return {
+      user: {
+        name: user.name,
+        email: user.email,
+      },
+      token,
     }
   }
 }

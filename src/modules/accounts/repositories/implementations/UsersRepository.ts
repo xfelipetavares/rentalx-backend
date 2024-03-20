@@ -1,11 +1,21 @@
 import { Repository, getRepository } from "typeorm"
-import { ContractUsersRepository, ICreateUserDTO } from "../contracts/ContractUsersRepository"
+import {
+  ContractUsersRepository,
+  ICreateUserDTO,
+  IUserDataDTO,
+} from "../contracts/ContractUsersRepository"
 import { User } from "../../entities/User"
 
 class UsersRepository implements ContractUsersRepository {
   constructor(private repository: Repository<User> = getRepository(User)) {}
-  async findByEmail(email: string): Promise<User> {
-    const result = await this.repository.findOne({ email })
+
+  async findById(userId: string): Promise<IUserDataDTO> {
+    const result = await this.repository.findOne({ id: userId })
+    return result
+  }
+
+  async findByEmail(userEmail: string): Promise<IUserDataDTO> {
+    const result = await this.repository.findOne({ email: userEmail })
     return result
   }
 
