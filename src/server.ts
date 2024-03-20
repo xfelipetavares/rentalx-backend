@@ -18,7 +18,9 @@ app.use((err: Error, _request: Request, response: Response, _next: NextFunction)
     return response.status(err.statusCode).json({ status: "error", message: err.message })
   }
 
-  return response.status(500).json({ status: "error", message: "Internal server error" })
+  return response
+    .status(500)
+    .json({ status: "error", message: `Internal server error - ${err.message}` })
 })
 
 app.listen(3333, () => console.log("server is online!"))
