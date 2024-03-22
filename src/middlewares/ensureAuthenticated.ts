@@ -10,9 +10,7 @@ interface IPayLoad {
 async function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
   const authHeader = request.headers.authorization
 
-  if (!authHeader) {
-    throw new AppError("Token Missing", 401)
-  }
+  if (!authHeader) throw new AppError("Token Missing", 401)
 
   try {
     const [, token] = authHeader.split(" ")
@@ -21,13 +19,13 @@ async function ensureAuthenticated(request: Request, response: Response, next: N
     const userRepository = new UsersRepository()
     const user = await userRepository.findById(userId)
 
-    if (!user) {
-      throw new AppError("User doesn't exist.", 401)
-    }
+    if (!user) throw new AppError("User doesn't exist.", 401)
+
+    request.user = { id: user.id }
 
     console.log(user)
-    // next()
-    return response.send("authenticated")
+    console.log("authenticated")
+    next()
   } catch (error) {
     throw new AppError("Invalid token.", 401)
   }

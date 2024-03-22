@@ -1,12 +1,15 @@
+import { User } from "../../entities/User"
+
 interface ICreateUserDTO {
+  id?: string
   name: string
   email: string
   password: string
   driver_license: string
+  avatar?: string
 }
 
 interface IUserDataDTO {
-  id: string
   email: string
   name: string
   password: string
@@ -15,8 +18,8 @@ interface IUserDataDTO {
 
 interface ContractUsersRepository {
   create(userData: ICreateUserDTO): Promise<void>
-  findByEmail(userEmail: string): Promise<IUserDataDTO>
-  findById(userId: string): Promise<IUserDataDTO>
+  findByEmail(userEmail: string): Promise<User>
+  findById(userId: string): Promise<User>
 }
 
 export { ContractUsersRepository, ICreateUserDTO, IUserDataDTO }
